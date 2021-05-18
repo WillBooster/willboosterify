@@ -145,13 +145,18 @@ export async function generatePackageJson(config: PackageConfig, skipAddingDeps:
       config.containingJavaScript ||
       config.containingJavaScriptInPackages ||
       config.containingTypeScript ||
-      config.containingTypeScriptInPackages
+      config.containingTypeScriptInPackages ||
+      config.containingSvelte ||
+      config.containingSvelteInPackages
     ) {
       devDependencies.push('eslint');
       if (config.containingYarnrcYml) {
         devDependencies.push('eslint-import-resolver-node');
       }
       if (config.containingTypeScriptInPackages) {
+        devDependencies.push('@typescript-eslint/parser');
+      }
+      if (config.containingSvelte) {
         devDependencies.push('@typescript-eslint/parser');
       }
     }
